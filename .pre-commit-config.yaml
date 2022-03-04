@@ -1,0 +1,54 @@
+exclude: demisto_sdk/tests/test_files/.*|.circleci/config.yml|demisto_sdk/commands/.*/tests/test_files/.*
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-docstring-first
+        exclude: demisto_sdk/commands/init/templates/.*
+    -   id: check-json
+        exclude: .vscode/.*
+    -   id: check-yaml
+    -   id: debug-statements
+        language_version: python3
+    -   id: name-tests-test
+        exclude: test_tools.py|demisto_sdk/commands/download/tests/tests_env/.*|demisto_sdk/commands/create_artifacts/tests/data|demisto_sdk/commands/common/content/tests/objects/pack_objects/script/script_test/TestNotUnifiedScript|demisto_sdk/commands/common/content/tests/objects/pack_objects/integration/integration_test/TestNotUnifiedIntegration|demisto_sdk/commands/test_content/tests/DemistoClientMock
+    -   id: requirements-txt-fixer
+-   repo: https://github.com/pycqa/flake8
+    rev: '4.0.1'
+    hooks:
+    -   id: flake8
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: v1.6.0
+    hooks:
+    -   id: autopep8
+-   repo: https://github.com/timothycrosley/isort
+    rev: 5.10.1
+    hooks:
+    -   id: isort
+        args: [--atomic]
+        types: [python]
+        verbose: true
+        exclude: demisto_sdk/commands/init/templates/.*
+-   repo: https://github.com/asottile/pyupgrade
+    rev: v2.31.0
+    hooks:
+    -   id: pyupgrade
+        exclude: test_tools.py|demisto_sdk/commands/download/tests/tests_env/.*
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.931
+    hooks:
+    -   id: mypy
+        exclude: tests/.*|demisto_sdk/commands/init/templates/.*
+        additional_dependencies: [
+            types-PyYAML==5.4.3,
+            types-setuptools==57.0.0,
+            types-ujson==0.1.1,
+            types-pytz==2021.1.0,
+            types-requests==2.25,
+            types-decorator==0.1.5,
+            types-dateparser==0.1.3,
+            types-tabulate==0.1.1,
+            types-python-dateutil==0.1.4
+            ]
